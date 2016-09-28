@@ -39,7 +39,11 @@ app.use(express.static(path.resolve(__dirname, "public")));
 app.get('/user', function(request, response) {
     response.render("user_view", {
        user : {
-           userName: 'hpotter'
+           userName: 'hpotter',
+           firstName: 'Harry',
+           lastName: 'Potter',
+           email: 'harry.potter@hogwarts.ac.uk',
+           phoneNumber: '+44 0206 412-5191'
        }
    });
 });
