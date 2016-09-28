@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ecd72d1-99d2-49ba-aeae-99393db2024f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/customers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app-api.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app-ejs.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ejs/404.ejs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ejs/user_view.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-static.js" afterPath="$PROJECT_DIR$/app-static.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="hello_express.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -243,7 +236,7 @@
       <option name="presentableId" value="Default" />
       <updated>1474967414951</updated>
       <workItem from="1474967416071" duration="12690000" />
-      <workItem from="1475033309300" duration="19803000" />
+      <workItem from="1475033309300" duration="19937000" />
     </task>
     <task id="LOCAL-00001" summary="Added full User object in user_view.swig and in app-static.js">
       <created>1475032895169</created>
@@ -259,11 +252,18 @@
       <option name="project" value="LOCAL" />
       <updated>1475033897215</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="APIv2">
+      <created>1475060520649</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1475060520650</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32493000" />
+    <option name="totallyTimeSpent" value="32627000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
@@ -321,7 +321,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added full User object in user_view.swig and in app-static.js" />
     <MESSAGE value="Fixed app-swig and app-static filename issue, also fixed /api/customers in both" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed app-swig and app-static filename issue, also fixed /api/customers in both" />
+    <MESSAGE value="APIv2" />
+    <option name="LAST_COMMIT_MESSAGE" value="APIv2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
