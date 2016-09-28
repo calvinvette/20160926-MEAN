@@ -2,6 +2,13 @@ var express = require("express");
 var app = express();
 var router = express.Router();
 var path = require("path");
+var swig = require("swig");
+
+swig = new swig.Swig();
+app.set('view engine', 'swig');
+app.set('views', path.resolve(__dirname, 'swig'));
+app.engine('swig', swig.renderFile);
+
 
 router.use(function(request, response, next) {
     var now = new Date();
@@ -29,6 +36,18 @@ app.get("/", function(request, response) {
 
 app.use(express.static(path.resolve(__dirname, "public")));
 
+app.get('/user', function(request, response) {
+    response.render("user_view", {
+       user : {
+           userName: 'hpotter',
+           firstName: 'Harry',
+           lastName: 'Potter',
+           email: 'harry.potter@hogwarts.ac.uk',
+           phoneNumber: '+44 0206 412-5191'
+       }
+   });
+});
+
 app.get("/api/customers", function(request, response) {
     var options = {
         // path.resolve(__dirname, "/data/")
@@ -42,14 +61,14 @@ app.get("/api/customers", function(request, response) {
     var fileName = "customers.json";
     response.sendFile(fileName, options,
         function (err) {
-        if (err) {
-            console.log(err);
-            response.status(err.status).end();
-        }
-        else {
-            console.log('Sent:', fileName);
-        }
-    });
+            if (err) {
+                console.log(err);
+                response.status(err.status).end();
+            }
+            else {
+                console.log('Sent:', fileName);
+            }
+        });
 });
 
 app.get("*", function(request, response) {
