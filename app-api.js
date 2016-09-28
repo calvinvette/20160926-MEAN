@@ -2,6 +2,8 @@ var express = require("express");
 var app = express();
 var router = express.Router();
 var path = require("path");
+var bodyParser = require("body-parser");
+
 
 router.use(function(request, response, next) {
     var now = new Date();
@@ -29,28 +31,9 @@ app.get("/", function(request, response) {
 
 app.use(express.static(path.resolve(__dirname, "public")));
 
-app.get("/api/customers", function(request, response) {
-    var options = {
-        // path.resolve(__dirname, "/data/")
-        root: __dirname + "/data/",
-        dotfiles: 'deny',
-        headers: {
-            'x-timestamp': Date.now(),
-            'x-sent': true
-        }
-    };
-    var fileName = "customers.json";
-    response.sendFile(fileName, options,
-        function (err) {
-        if (err) {
-            console.log(err);
-            response.status(err.status).end();
-        }
-        else {
-            console.log('Sent:', fileName);
-        }
-    });
-});
+app.use(bodyParser.json());
+app.use("/api/customers", require("./api/customers.js"));
+// app.use("/api/customers", require("./api/customers.js").default(app));
 
 // app.get("*", function(request, response) {
 //     response.render("404", {url : request.url});

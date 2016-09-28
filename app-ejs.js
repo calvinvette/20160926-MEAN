@@ -3,6 +3,13 @@ var app = express();
 var router = express.Router();
 var path = require("path");
 
+// set the view engine to ejs
+app.set('view engine', 'ejs');
+
+// set the folder where the templates live
+app.set('views', path.resolve(__dirname, 'ejs'));
+
+
 router.use(function(request, response, next) {
     var now = new Date();
     console.log("%s [%s] %s %s %s %s",
@@ -29,6 +36,19 @@ app.get("/", function(request, response) {
 
 app.use(express.static(path.resolve(__dirname, "public")));
 
+app.get('/user', function(request, response) {
+    response.render("user_view", {
+        user : {
+            userName: 'hpotter',
+            firstName: 'Harry',
+            lastName: 'Potter',
+            email: 'harry.potter@hogwarts.ac.uk',
+            phoneNumber: '+44 0206 412-5191'
+        }
+    });
+});
+
+
 app.get("/api/customers", function(request, response) {
     var options = {
         // path.resolve(__dirname, "/data/")
@@ -52,9 +72,9 @@ app.get("/api/customers", function(request, response) {
     });
 });
 
-// app.get("*", function(request, response) {
-//     response.render("404", {url : request.url});
-// });
+app.get("*", function(request, response) {
+    response.render("404", {url : request.url});
+});
 
 //var port = (process.env.EXPRESS_PORT) ? process.env.EXPRESS_PORT : 1701;
 var port = process.env.EXPRESS_PORT || 1701;
