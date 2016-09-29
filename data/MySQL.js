@@ -56,6 +56,30 @@ connection.query("insert into customer " +
 });
 
 
+// Update
+connection.query("update customer set " +
+    "firstName = ?, lastName = ?, phoneNumber = ? where customerId = ?",
+    ['Neville', 'Longbottom', '+44 0206 491-2934', 4],
+    function(err, results) {
+        if (err) {
+            console.log("Err: " + err);
+        } else {
+            console.log("Success...");
+            console.log(results);
+        }
+    });
+
+// Delete
+connection.query("delete from customer where customerId = ?", [27],
+    function(err, results) {
+        if (err) {
+            console.log("Err: " + err);
+        } else {
+            console.log("Success...");
+            console.log(results);
+        }
+    });
+
 // Terminate the connection and the thread holding it.
 //connection.destroy();
 connection.end(function(err) {
