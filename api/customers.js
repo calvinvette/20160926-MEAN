@@ -86,7 +86,7 @@ try {
 
     router.post("/", function(request, response) {
         console.log("Posting customers...");
-        var cust = request.body;
+        var cust = request.body; // Populated by body-parser as JSON
         cust.customerId = new Date().getTime();
         customers.push(cust);
         // Location Header???
@@ -115,6 +115,7 @@ try {
         cust.firstName = updatedCustomer.firstName;
         cust.lastName = updatedCustomer.lastName;
         cust.phoneNumber = updatedCustomer.phoneNumber;
+        cust.email = updatedCustomer.email;
         response.status(201).json(cust).end();
     });
 

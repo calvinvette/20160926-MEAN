@@ -4,7 +4,7 @@ var router = express.Router();
 var path = require("path");
 var bodyParser = require("body-parser");
 
-
+// Consider using the Morgan logging library
 router.use(function(request, response, next) {
     var now = new Date();
     console.log("%s [%s] %s %s %s %s",
@@ -29,10 +29,11 @@ app.get("/", function(request, response) {
     response.send("<h1>Hello, World (root-level) </h1>");
 });
 
-app.use(express.static(path.resolve(__dirname, "public")));
-
 app.use(bodyParser.json());
 app.use("/api/customers", require("./api/customers.js"));
+
+app.use(express.static(path.resolve(__dirname, "public")));
+
 // app.use("/api/customers", require("./api/customers.js").default(app));
 
 // app.get("*", function(request, response) {
