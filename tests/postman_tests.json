@@ -1,0 +1,222 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CustomerAPI",
+		"_postman_id": "15f52347-43c8-2a7b-8cad-184964190b10",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:1701/api/customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "\nvar oldNumCusts = postman.getGlobalVariable(\"numberOfCusts\");\n// Go GET the data again (GET /api/customers) and count the number of customers now\nvar jsonData = JSON.parse(responseBody);\ntests[\"Number of Customers increased\"] = jsonData.length > oldNumCusts;\n\ntests[\"Status code is 201\"] = responseCode.code === 201;"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": "postman.clearGlobalVariable(\"numberOfCusts\");\n\npostman.setGlobalVariable(\"numberOfCusts\", \"27\"); // dynamically calculate"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:1701/api/customers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"James\",\n    \"customerId\": \"1\",\n    \"workAddress\": \"1\",\n    \"lastName\": \"Potter\",\n    \"homeAddress\": \"2\",\n    \"phoneNumber\": \"+44 0206 987-1234\",\n    \"email\": \"noemail@hogwarts.ac.uk\"\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:1701/api/customers JSON up, XML down",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 201\"] = responseCode.code === 201;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:1701/api/customers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"James\",\n    \"customerId\": \"1\",\n    \"workAddress\": \"1\",\n    \"lastName\": \"Potter\",\n    \"homeAddress\": \"2\",\n    \"phoneNumber\": \"+44 0206 987-1234\",\n    \"email\": \"noemail@hogwarts.ac.uk\"\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:1701/api/customers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Status code is 201\"] = responseCode.code === 200;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:1701/api/customers",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"James\",\n    \"customerId\": \"1\",\n    \"workAddress\": \"1\",\n    \"lastName\": \"Potter\",\n    \"homeAddress\": \"2\",\n    \"phoneNumber\": \"+44 0206 987-1234\",\n    \"email\": \"noemail@hogwarts.ac.uk\"\n  }"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:1701/api/customers/lastName/Weasley",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Got back 4 weasleys\"] = jsonData.length === 4;"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:1701/api/customers/lastName/Weasley",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Find ALl Weasleys"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:1701/api/customers/1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"First Name is Harry\"] = jsonData.firstName === \"Harry\";\ntests[\"Last Name is Potter\"] = jsonData.lastName === \"Potter\";"
+					}
+				}
+			],
+			"request": {
+				"url": "http://localhost:1701/api/customers/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Find Harry by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:1701/api/customers/1",
+			"request": {
+				"url": "http://localhost:1701/api/customers/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Update Harry's phone"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:1701/api/customers/2",
+			"request": {
+				"url": "http://localhost:1701/api/customers/2",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
