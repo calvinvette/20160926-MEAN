@@ -1,7 +1,9 @@
 var mysql = require("mysql");
 var connection = mysql.createConnection({
+    // Externalize these values, probably in a 'require'-d file
+    // that can be changed by environment
     host : 'localhost',
-    user : 'root',
+    user : 'root', // use the application's user id, not root!
     password : "password",
     database : 'weasleydb' // Should match the RunAll.sql script!
 });
