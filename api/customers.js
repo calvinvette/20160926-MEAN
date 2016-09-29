@@ -2,7 +2,8 @@ var express = require("express");
 var router = express.Router();
 var o2x = require("object-to-xml");
 var fs = require("fs");
-var dao = require('../dao/CustomerMock');
+// var dao = require('../dao/CustomerMockDAO');
+var dao = require('../dao/CustomerMySQLDAO');
 
 var app = {};
 function init(appVar) {
@@ -23,14 +24,16 @@ function init(appVar) {
     // GET http://localhost:1701/api/customers/1234, where 1234 is the value of "id"
     router.get("/:id", function (request, response) {
         var id = request.params.id;
-        var foundCust = dao.findById(id);
-        if (foundCust != null) {
-            response.status(200).json(foundCust);
-        } else {
-            response.status(404).json({
-                message: "Customer#" + id + " not found."
-            }).end();
-        }
+        var foundCustPromise = dao.findById(id);
+        foundCustPromise.then(function(foundCust) {
+            if (foundCust != null) {
+                response.status(200).json(foundCust);
+            } else {
+                response.status(404).json({
+                    message: "Customer#" + id + " not found."
+                }).end();
+            }
+        });
     });
 
     // GET http://localhost:1701/api/customers/lastName/Weasley, where Weasley is the value of "lastName"
